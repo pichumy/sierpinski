@@ -1,0 +1,59 @@
+/* Main Layout */
+html, body {
+    overflow: hidden;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-family: arial;
+    color: #555;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+h1 { font-size: 18px; }
+h2 { font-size: 13px; font-weight: normal; }
+
+.background {
+    background: -webkit-linear-gradient(top, #fff, #000);
+    background: -moz-linear-gradient(top, #fff, #000);
+    background: -ms-linear-gradient(top, #fff, #000);
+}
+
+/* Control Box */
+#controls {
+    position: absolute;
+    left: 20px;
+    background-color: rgba(200,200,255,0.9);
+    border-radius: 0 0 10px 10px;
+    border: 1px solid #888;
+    border-top: none;
+    padding: 0 10px 10px 10px;
+}
+
+#controls > ul { list-style-type: none; padding: 0; margin: 0; }
+#controls > ul > li { float: left; }
+#controls button {
+    border: 1px solid #999;
+    background-color: #dde;
+    border-radius: 4px;
+    padding: 3px;
+    min-width: 55px;
+    margin: 3px;
+}
+
+#controls button.zoom {
+    min-width: 30px;
+}
+
+#controls button:hover,
+#controls button:focus {
+    background-color: #eef;
+}
+
+#controls button:active {
+    background-color: #ccd;
+}
+
+/* Sierpinski triangle */
+#explorer { color: #229922; }
