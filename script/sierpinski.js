@@ -107,7 +107,7 @@ sierpinski.prototype.render = function(stage) {
         context.lineTo(triangle.p1.x, triangle.p1.y);
     }
     
-    // Remove the inner triangle by plotting the path clockwise
+    // Remove the inner triangles by plotting the path clockwise
     function remove(context, triangle) {
     	context.moveTo(triangle.n1.x, triangle.n1.y);
     	context.lineTo(triangle.n3.x, triangle.n3.y);
@@ -115,7 +115,7 @@ sierpinski.prototype.render = function(stage) {
     	context.lineTo(triangle.n1.x, triangle.n1.y);
     }
     
-    function recurse(context, triangle, needsBackground) {
+    function recurse(context, triangle) {
         
         // Stop if the triangle is too small
         if (triangle.width < minimumSize) {
@@ -131,50 +131,34 @@ sierpinski.prototype.render = function(stage) {
             return;
         }
         
+        // Remove inner triangle
+        remove(context, triangle);
+        
         // Create 3 smaller triangles from larger one
         var t1 = createTriangle(triangle.p1, triangle.n1, triangle.n3);
         var t2 = createTriangle(triangle.n1, triangle.p2, triangle.n2);
         var t3 = createTriangle(triangle.n3, triangle.n2, triangle.p3);
-        
-        if (needsBackground) {
-              /*      if (
-                        ((t1.x-t1.width > 0 && t1.x < canvas.width)
-                    && (t1.y-t1.height > 0 && t1.y < canvas.height))
-                        ||
-                                               ((t2.x-t2.width > 0 && t2.x < canvas.width)
-                    && (t2.y-t2.height > 0 && t2.y < canvas.height))
-                        ||
-                                               ((t3.x-t3.width > 0 && t3.x < canvas.width)
-                    && (t3.y-t3.height > 0 && t3.y < canvas.height))
-                    ){*/
-       //     || t1.x + triangle.width < 0
-         //   || t1.y + triangle.height < 0)
-   
-            draw(context, triangle);
-            needsBackground = false;
-                  //  }
-        }
-
-        // Remove inner triangle
-        remove(context, triangle);
-        
+                
         // Recurse the new triangles
-        recurse(context, t1, needsBackground);
-        recurse(context, t2, needsBackground);
-        recurse(context, t3, needsBackground);
+        recurse(context, t1);
+        recurse(context, t2);
+        recurse(context, t3);
     }
     
     // Our easel shape
-    var shape = new createjs.Shape();
-    
-    // Colour the shape
-    shape.graphics.beginFill(this.options.colour);     
+    var shape = new createjs.Shape();  
     
     // Create initial triangle object
 	var triangle = createTriangle(this.p1, this.p2, this.p3);
     
+    // Colour the shape
+    shape.graphics.beginFill(this.options.colour); 
+    
+    // Draw the outer triangle
+    draw(shape.graphics, triangle);
+    
     // Begin recursion
-    recurse(shape.graphics, triangle, true);
+    recurse(shape.graphics, triangle);
     
     // Return the completed shape
     return shape;

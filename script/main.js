@@ -2,7 +2,7 @@ Zepto(function($) {
    
     // These guys change the amount we move by
     var panStep = 30;
-    var scaleStep = 1.5;
+    var scaleStep = 1.03;
     
     var stage = {};
     var triangle = {};
