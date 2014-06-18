@@ -147,19 +147,19 @@ sierpinski.prototype.render = function(stage) {
     
     // Our easel shape
     var shape = new createjs.Shape();  
-    
+
     // Create initial triangle object
-	var triangle = createTriangle(this.p1, this.p2, this.p3);
-    
+    var triangle = createTriangle(this.p1, this.p2, this.p3);
+
     // Colour the shape
     shape.graphics.beginFill(this.options.colour); 
-    
+
     // Draw the outer triangle
     draw(shape.graphics, triangle);
-    
+
     // Begin recursion
     recurse(shape.graphics, triangle);
-    
+
     // Return the completed shape
     return shape;
 }
