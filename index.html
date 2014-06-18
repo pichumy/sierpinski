@@ -2,36 +2,40 @@
 <html>
 <head>
     <title>Sierpinski Triangle Explorer</title>
+
+    <!-- A clean base stylesheet -->
+    <link href="style/pure-min.css" rel="stylesheet" type="text/css" />
+
+    <!-- The main page style -->
     <link href="style/main.css" rel="stylesheet" type="text/css" />
 </head>
     
 <body class="background">
-    
+
     <div id="controls">
         <h1>Sierpinski Triangle Explorer</h1>        
         <h2>Use the controls below to pan and zoom the explorer<br/>You can also use the mouse to pan and mouse-wheel to zoom</h2>
         <ul>
-            <li><button id="left">Left</button></li>
-            <li><button id="right">Right</button></li>
-            <li><button id="up">Up</button></li>
-            <li><button id="down">Down</button></li>
-            <li><button class="zoom" id="in">+</button></li>
-            <li><button class="zoom" id="out">-</button></li>
-            <li><button id="reset">Reset</button></li>
+            <li><button class="button-style button-pan pure-button" id="left">Left</button></li>
+            <li><button class="button-style button-pan pure-button" id="right">Right</button></li>
+            <li><button class="button-style button-pan pure-button" id="up">Up</button></li>
+            <li><button class="button-style button-pan pure-button" id="down">Down</button></li>
+            <li><button class="button-style button-zoom pure-button" id="in">+</button></li>
+            <li><button class="button-style button-zoom pure-button" id="out">-</button></li>
+            <li><button class="button-style pure-button" id="reset">Reset</button></li>
         </ul>
     </div>
-    
+
     <!-- The main explorer container -->
     <canvas id="explorer"></canvas>
-    
+
     <!-- Zepto is a tiny jQuery clone which gives us clean event handling -->
     <script src="script/zepto.min.js"></script>
 
     <!-- The sierpinski code -->
     <script src="script/sierpinski.js"></script>
-    
+
     <!-- Main orchestration -->
     <script src="script/main.js"></script>
-
 </body>
 </html>

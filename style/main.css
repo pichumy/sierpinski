@@ -15,16 +15,16 @@ h1 { font-size: 18px; }
 h2 { font-size: 13px; font-weight: normal; }
 
 .background {
-    background: -webkit-linear-gradient(top, #fff, #558);
-    background: -moz-linear-gradient(top, #fff, #558);
-    background: -ms-linear-gradient(top, #fff, #558);
+    background: -webkit-linear-gradient(top, #fff, #7bf);
+    background: -moz-linear-gradient(top, #fff, #7bf);
+    background: -ms-linear-gradient(top, #fff, #7bf);
 }
 
 /* Control Box */
 #controls {
     position: absolute;
-    left: 20px;
-    background-color: rgba(200,200,255,0.9);
+    right: 20px;
+    background-color: rgba(180,220,255,0.9);
     border-radius: 0 0 10px 10px;
     border: 1px solid #888;
     border-top: none;
@@ -32,28 +32,12 @@ h2 { font-size: 13px; font-weight: normal; }
 }
 
 #controls > ul { list-style-type: none; padding: 0; margin: 0; }
-#controls > ul > li { float: left; }
-#controls button {
-    border: 1px solid #999;
-    background-color: #dde;
-    border-radius: 4px;
-    padding: 3px;
-    min-width: 55px;
-    margin: 3px;
-}
+#controls > ul > li { float: left; padding: 3px; }
 
-#controls button.zoom {
-    min-width: 30px;
-}
+/* Buttons */
+.button-style { border-radius: 4px; font-size: 85%; color: #333; }
+.button-pan { background: #5ae; width: 65px; }
+.button-zoom { background: #4d6; width: 35px; }
 
-#controls button:hover,
-#controls button:focus {
-    background-color: #eef;
-}
-
-#controls button:active {
-    background-color: #ccd;
-}
-
-/* Sierpinski triangle */
-#explorer { color: #000; }
+/* Sierpinski Triangle */
+#explorer { color: #222; }
