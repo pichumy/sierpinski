@@ -4,7 +4,7 @@ Zepto(function($) {
     var panStep = 30;
     var scaleStep = 1.03;
     
-    var stage = {};
+    var context = {};
     var triangle = {};
     var midPoint = {};
     
@@ -18,49 +18,49 @@ Zepto(function($) {
     }
     
     function init() {
-    	// Ratio of side to height of an equilateral triangle
-	    var ratio = Math.sqrt(3) / 2;       
-        var explorer = $("#explorer");    
-    	var colour = rgb2hex(explorer.css('color'));
-		var canvas = explorer[0];
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;   
+        // Ratio of side to height of an equilateral triangle
+        var ratio = Math.sqrt(3) / 2;
+        var explorer = $("#explorer");
+        var colour = rgb2hex(explorer.css('color'));
+        var stageWidth = window.innerWidth;
+        var stageHeight = window.innerHeight;
+
+        var canvas = explorer[0];
+        canvas.width = stageWidth;
+        canvas.height = stageHeight;
+        context = canvas.getContext("2d");
 
         var width, height, x, y;
 
         // Determine biggest equilateral triangle to fit on screen
-        if (ratio * canvas.width < canvas.height) {
+        if (ratio * stageWidth < stageHeight) {
             // Triangle takes up entire width    
-            width = canvas.width;
-            height = ratio * canvas.width;
+            width = stageWidth;
+            height = ratio * stageWidth;
             x = 0;
-            y = canvas.height - height;
+            y = stageHeight - height;
         } else {
             // Triangle takes up entire height
-            width = canvas.height / ratio;
-            height = canvas.height;
-            x = canvas.width / 2 - width / 2;
+            width = stageHeight / ratio;
+            height = stageHeight;
+            x = stageWidth / 2 - width / 2;
             y = 0;           
         }
 
         // Our initial triangle points
-        var p1 = { x: x, y: canvas.height };
-        var p2 = { x: canvas.width / 2, y: y };
-        var p3 = { x: x + width, y: canvas.height };    
+        var p1 = { x: x, y: stageHeight };
+        var p2 = { x: stageWidth / 2, y: y };
+        var p3 = { x: x + width, y: stageHeight };
 
-        stage = new createjs.Stage(canvas);
         triangle = new sierpinski(p1, p2, p3, { colour: colour });
         midPoint = { x: canvas.width / 2, y: canvas.height / 2 };
-        
+
         render();
     }
         
     function render() {
-        var shape = triangle.render(stage);
-        stage.addChild(shape);
-        stage.update();
-        stage.removeChild(shape);
+        context.clearRect (0, 0, context.canvas.width, context.canvas.height);
+        triangle.render(context);
     }
     
     // User interactions

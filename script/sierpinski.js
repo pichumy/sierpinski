@@ -68,10 +68,10 @@ sierpinski.prototype.scale = function(origin, factor) {
 }
 
 // The main render function
-sierpinski.prototype.render = function(stage) {
+sierpinski.prototype.render = function(context) {
     
     // Some context variables
-    var canvas = stage.canvas;
+    var canvas = context.canvas;
     var minimumSize = this.options.minimumSize;
 
     // Builds a triangle object from 3 co-ordinates and includes the 3 mid points
@@ -116,7 +116,7 @@ sierpinski.prototype.render = function(stage) {
     }
     
     function recurse(context, triangle) {
-        
+
         // Stop if the triangle is too small
         if (triangle.width < minimumSize) {
             return;
@@ -130,38 +130,36 @@ sierpinski.prototype.render = function(stage) {
         {
             return;
         }
-        
+
         // Remove inner triangle
         remove(context, triangle);
-        
+
         // Create 3 smaller triangles from larger one
         var t1 = createTriangle(triangle.p1, triangle.n1, triangle.n3);
         var t2 = createTriangle(triangle.n1, triangle.p2, triangle.n2);
         var t3 = createTriangle(triangle.n3, triangle.n2, triangle.p3);
-                
+
         // Recurse the new triangles
         recurse(context, t1);
         recurse(context, t2);
         recurse(context, t3);
     }
-    
-    // Our easel shape
-    var shape = new createjs.Shape();  
 
     // Create initial triangle object
     var triangle = createTriangle(this.p1, this.p2, this.p3);
 
-    // Colour the shape
-    shape.graphics.beginFill(this.options.colour); 
+    // Start the path
+    context.beginPath();
+    context.fillStyle = this.options.colour;
 
     // Draw the outer triangle
-    draw(shape.graphics, triangle);
+    draw(context, triangle);
 
     // Begin recursion
-    recurse(shape.graphics, triangle);
+    recurse(context, triangle);
 
-    // Return the completed shape
-    return shape;
+    // Complete the path
+    context.fill();
 }
         
 
